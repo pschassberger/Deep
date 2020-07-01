@@ -1,0 +1,9 @@
+What is a NN? - https://www.youtube.com/watch?v=aircAruvnKk
+
+NN components:
+    - Input layer
+    - Hidden layer
+    - Output layer, y_hat
+    - Weights and biases. W and b
+    - Activation function, sigma
+
