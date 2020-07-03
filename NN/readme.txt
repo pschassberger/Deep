@@ -6,5 +6,5 @@ source: [1] https://towardsdatascience.com/how-to-build-your-own-neural-network-
 
 New Project Addition:
 
-I will create a 3D enviornment for a NN trained character to traverse...
+I will create a 3D enviorment for a NN trained character to traverse...
 Hopefully!
