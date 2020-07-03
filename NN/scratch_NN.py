@@ -1,6 +1,6 @@
 import numpy as np
 
-# creating a 1 layer NN
+# creating a basic 1 layer NN for understanding
 
 # Sigmoid
 def sigmoid(x):
@@ -30,7 +30,7 @@ class NeuralNet:
         self.weight2 += d_weight2
 
 # test code
-
+'''
 X = np.array([[0, 0, 1],
             [0, 1, 1],
             [1, 0, 1],
@@ -44,4 +44,4 @@ for i in range(1500):
     NN.feedforward()
     NN.backpropogation()
 
-print(NN.output)
+print(NN.output)'''
