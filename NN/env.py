@@ -1,6 +1,8 @@
 # create an enviorment for a character to move in
 # initial build
 
+# On hold for now, will experiment with Godot
+
 import pygame
 
 pygame.init()
