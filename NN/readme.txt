@@ -1,4 +1,4 @@
-
+Learning about NN's
 
 This is a project to further learn about NN and Deep learning. 
 I will follow and implement a scratch NN algorithm 
@@ -8,3 +8,5 @@ New Project Addition:
 
 I will create a 3D enviorment for a NN trained character to traverse...
 Hopefully!
+Update: Created initial enviorment with Godot. Still experimenting. 
+Looks promising so far!
