@@ -8,7 +8,7 @@ import pygame
 pygame.init()
 
 #set up screen
-screen = pygame.display.set_mode([1000, 1000])
+screen = pygame.display.set_mode([2000, 1500])
 
 # end with user prompt
 running = True
