@@ -4,18 +4,18 @@
 # On hold for now, will experiment with Godot
 
 import pygame
+from agent.user import Agent
+
 
 
 pygame.init()
 
 #set up screen
-screen = pygame.display.set_mode([2000, 1500])
+screen_width = 2000
+screen_height = 1500
+screen = pygame.display.set_mode([screen_width, screen_height])
 # character
-x = 200
-y = 200
-width = 200
-height = 200
-velocity = 50
+agent = Agent(200, 200, 100, 100)
 # end with user prompt
 running = True
 while running:
@@ -29,20 +29,20 @@ while running:
 
     # keys
     key = pygame.key.get_pressed()
-    if key[pygame.K_LEFT]:
-        x -= velocity
+    if key[pygame.K_LEFT] and agent.x > 0:
+        agent.x -= agent.velocity
 
-    if key[pygame.K_RIGHT]:
-        x += velocity
+    if key[pygame.K_RIGHT] and agent.x < screen_width - agent.width:
+        agent.x += agent.velocity
 
-    if key[pygame.K_UP]:
-        y -= velocity
+    if key[pygame.K_UP] and agent.y > 0:
+        agent.y -= agent.velocity
 
-    if key[pygame.K_DOWN]:
-        y += velocity
+    if key[pygame.K_DOWN] and agent.y < screen_height - agent.height:
+        agent.y += agent.velocity
 
     # draw character
-    pygame.draw.rect(screen, (225, 0, 0), (x, y, width, height))
+    pygame.draw.rect(screen, (225, 0, 0), (agent.x, agent.y, agent.width, agent.height))
     pygame.display.update()
     # redraw old location
     screen.fill((0,0,0))
