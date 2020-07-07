@@ -2,10 +2,8 @@
 # initial build
 
 # On hold for now, will experiment with Godot
-
-import pygame
-from agent.user import Agent
-
+#import pygame
+import agent
 
 
 pygame.init()

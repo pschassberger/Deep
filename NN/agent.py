@@ -1,6 +1,5 @@
 # create character class
 
-import pygame
 
 class Agent(object):
     def __init__(self, x, y, width, height):
