@@ -1,1 +1,3 @@
 # Code for the NN used to control our character
+# will implement a reinforment deep learning algo, hopefully...
+

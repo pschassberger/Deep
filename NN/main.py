@@ -95,16 +95,7 @@ class Snake(tk.Canvas):
             score = self.find_withtag("score")
             self.itemconfigure(score, text=f"Score: {self.score}", tag="score")
 
-    def end_game(self):
-        self.delete(tk.ALL)
-        self.create_text(
-            self.winfo_width() / 2,
-            self.winfo_height() / 2,
-            text=f"Game Over! You scored: {self.score}!",
-            fill="#fff",
-            font=14
-        )
-
+    #Character movement
     def move_snake(self):
         head_x_pos, head_y_pos = self.snake_positions[0]
 
@@ -137,6 +128,7 @@ class Snake(tk.Canvas):
         if (new_direction in all_directions and {new_direction, self.direction} not in opposites):
             self.direction = new_direction
 
+    # run functions to check for events'
     def perform_actions(self):
         if self.check_collision():
             self.end_game()
@@ -145,7 +137,7 @@ class Snake(tk.Canvas):
         self.move_snake()
 
         self.after(GAME_SPEED, self.perform_actions)
-
+    # random target location
     def set_new_target_position(self):
         while True:
             x_pos = randint(3, 55) * MOVE_INCREMENT
@@ -154,6 +146,17 @@ class Snake(tk.Canvas):
 
             if food_position not in self.snake_positions:
                 return food_position
+
+    #Check endgame
+    def end_game(self):
+        self.delete(tk.ALL)
+        self.create_text(
+            self.winfo_width() / 2,
+            self.winfo_height() / 2,
+            text=f"Game Over! You scored: {self.score}!",
+            fill="#fff",
+            font=14
+        )
 
 root = tk.Tk()
 root.title("NN-Snake")
