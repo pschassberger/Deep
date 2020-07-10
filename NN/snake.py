@@ -6,6 +6,7 @@
 import tkinter as tk
 from random import randint
 from PIL import Image, ImageTk
+import random
 
 # set constants
 MOVE_INCREMENT = 20
@@ -14,9 +15,7 @@ GAME_SPEED = 1000 // MOVES_PER_SECOND
 SCREEN_WIDTH = 1160
 SCREEN_HEIGHT = 840
 
-
 # create gem class
-
 class Snake(tk.Canvas):
     def __init__(self):
         super().__init__(width=SCREEN_WIDTH, height=SCREEN_HEIGHT, 
@@ -24,7 +23,7 @@ class Snake(tk.Canvas):
 
         self.snake_positions = [(100, 100), (80, 100), (60, 100)]
         self.target_position = self.set_new_target_position()
-        self.direction = "Right"
+        self.event = "Right"
 
         self.score = 0
         
@@ -74,7 +73,7 @@ class Snake(tk.Canvas):
     # check for collisions
     def check_collision(self):
         head_x_pos, head_y_pos = self.snake_positions[0]
-
+        
         return (
             head_x_pos in (40, 1120)
             or head_y_pos in (80, 800)
@@ -98,20 +97,20 @@ class Snake(tk.Canvas):
     #Character movement
     def move_snake(self):
         head_x_pos, head_y_pos = self.snake_positions[0]
+        # random movement
+        actions = ["Right", "Left", "Up", "Down"]
+        outcome = random.choice(actions)
 
-        if self.direction == "Left":
-            new_head_pos = (head_x_pos - MOVE_INCREMENT, head_y_pos)
-
-        elif self.direction == "Left":
-            new_head_pos = (head_x_pos - MOVE_INCREMENT, head_y_pos)
-
-        elif self.direction == "Right":
+        if self.event == "Right":
             new_head_pos = (head_x_pos + MOVE_INCREMENT, head_y_pos)
 
-        elif self.direction == "Down":
+        elif self.event == "Left":
+            new_head_pos = (head_x_pos - MOVE_INCREMENT, head_y_pos)
+
+        elif self.event == "Down":
             new_head_pos = (head_x_pos, head_y_pos + MOVE_INCREMENT)
 
-        elif self.direction == "Up":
+        elif self.event == "Up":
             new_head_pos = (head_x_pos, head_y_pos - MOVE_INCREMENT)
 
         self.snake_positions = [new_head_pos] + self.snake_positions[:-1]
@@ -120,13 +119,13 @@ class Snake(tk.Canvas):
             self.coords(segment, pos)
 
     def on_key_press(self, e):
-        new_direction = e.keysym
+        new_event = e.keysym
 
-        all_directions = ("Up", "Down", "Left", "Right")
+        all_events = ("Up", "Down", "Left", "Right")
         opposites = ({"Up", "Down"}, {"Left", "Right"})
 
-        if (new_direction in all_directions and {new_direction, self.direction} not in opposites):
-            self.direction = new_direction
+        if (new_event in all_events and {new_event, self.event} not in opposites):
+            self.event = new_event
 
     # run functions to check for events'
     def perform_actions(self):
