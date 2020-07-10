@@ -1,6 +1,6 @@
 
-# Credit to https://github.com/tecladocode/tkinter-snake
-# Thank you for the game source code
+# Credit to https://github.com/tecladocode/tkinter-snake for source code
+# Thank you for the game!!
 
 
 import tkinter as tk
@@ -8,16 +8,18 @@ from random import randint
 from PIL import Image, ImageTk
 
 # set constants
-MOVE_INCREMENT = 50
-MOVES_PER_SECOND = 25
-GAME_SPEED = 1000 #moves per second
+MOVE_INCREMENT = 20
+MOVES_PER_SECOND = 15
+GAME_SPEED = 1000 // MOVES_PER_SECOND
+SCREEN_WIDTH = 1160
+SCREEN_HEIGHT = 840
 
 
 # create gem class
 
 class Snake(tk.Canvas):
     def __init__(self):
-        super().__init__(width=600, height = 620, 
+        super().__init__(width=SCREEN_WIDTH, height=SCREEN_HEIGHT, 
                     background="black", highlightthickness=0)
 
         self.snake_positions = [(100, 100), (80, 100), (60, 100)]
@@ -47,27 +49,35 @@ class Snake(tk.Canvas):
             print("error")
             root.destroy()
             raise
-
+    # create objects for tk window
     def create_objects(self):
+        # score text
         self.create_text(
-            35, 12, text=f"Score: {self.score}", tag="score",
-                        fill="#fff", font=10
+            75, 30, text=f"Score: {self.score}", tag="score",
+                        fill="#fff", font=8
             )
 
+        # snake pos
         for x_pos, y_pos in self.snake_positions:
             self.create_image(
                 x_pos, y_pos, image=self.snake_body, tag="snake"
             )
 
         self.create_image(*self.target_position, image=self.target, tag="target")
-        self.create_rectangle(7, 27, 593, 613, outline="#525d69")
+        self.create_rectangle(40, 80, 1120, 800, outline="#525d69")
 
+        '''# Data Output
+        self.create_rectangle(1140, 80, 1480, 800, outline="#525d69")
+        self.create_text(
+            1200, 120, text=f"Data:", tag=None, fill="#fff", font=8
+        )'''
+    # check for collisions
     def check_collision(self):
         head_x_pos, head_y_pos = self.snake_positions[0]
 
         return (
-            head_x_pos in (0, 600)
-            or head_y_pos in (20, 620)
+            head_x_pos in (40, 1120)
+            or head_y_pos in (80, 800)
             or (head_x_pos, head_y_pos) in self.snake_positions[1:]
         )
 
@@ -101,6 +111,9 @@ class Snake(tk.Canvas):
         if self.direction == "Left":
             new_head_pos = (head_x_pos - MOVE_INCREMENT, head_y_pos)
 
+        elif self.direction == "Left":
+            new_head_pos = (head_x_pos - MOVE_INCREMENT, head_y_pos)
+
         elif self.direction == "Right":
             new_head_pos = (head_x_pos + MOVE_INCREMENT, head_y_pos)
 
@@ -121,10 +134,7 @@ class Snake(tk.Canvas):
         all_directions = ("Up", "Down", "Left", "Right")
         opposites = ({"Up", "Down"}, {"Left", "Right"})
 
-        if (
-            new_direction in all_directions
-            and {new_direction, self.direction} not in opposites
-        ):
+        if (new_direction in all_directions and {new_direction, self.direction} not in opposites):
             self.direction = new_direction
 
     def perform_actions(self):
@@ -138,15 +148,15 @@ class Snake(tk.Canvas):
 
     def set_new_target_position(self):
         while True:
-            x_pos = randint(1, 29) * MOVE_INCREMENT
-            y_pos = randint(3, 30) * MOVE_INCREMENT
+            x_pos = randint(3, 55) * MOVE_INCREMENT
+            y_pos = randint(5, 39) * MOVE_INCREMENT
             food_position = (x_pos, y_pos)
 
             if food_position not in self.snake_positions:
                 return food_position
 
 root = tk.Tk()
-root.title("snek")
+root.title("NN-Snake")
 root.resizable(False, False)
 root.tk.call("tk", "scaling", 4.0)
 
