@@ -2,6 +2,7 @@
 # snake game
 import pygame
 from random import randint
+import random
 
 
 # Constants
@@ -33,19 +34,27 @@ def game():
             
             print(event)
 
-            if event.type == pygame.KEYDOWN:
+            '''if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
-                    dx += 20
+                    dx = 20
+                    dy = 0
                 elif event.key == pygame.K_LEFT:
-                    dx -= 20
+                    dx = -20
+                    dy = 0
                 elif event.key == pygame.K_UP:
-                    dy -= 20
+                    dy = -20
+                    dx = 0
                 elif event.key == pygame.K_DOWN:
-                    dy += 20
+                    dy = 20
+                    dx = 0
         x += dx
         y += dy
         ui.fill(BLACK)
-        pygame.draw.rect(ui, GREEN, [x,y,20,20])
+        pygame.draw.rect(ui, GREEN, [x,y,20,20])'''
+
+
+        nn_moves()
+        
         pygame.display.update()
         clock.tick(20)
 
@@ -55,37 +64,28 @@ def game():
     pygame.quit()
     quit()
 
-# snake and target
-def snake():
-    x1, y1 = 200, 200
-    pygame.draw.rect(ui, GREEN, [x1,y1,20,20])
-    x1 += x
-    y1 += y
-    pygame.display.update()
+# autonoma
 
-def target():
-    x_pos = randint(0,1060)
-    y_pos = randint(0,700)
-    pygame.draw.rect(ui, RED, [x_pos,y_pos,20,20])
-    pygame.display.update()
+def nn_moves():
+    outcomes = ['right', 'left', 'up', 'down']
+    x,y=200,200
+    choice = random.choice(outcomes)
+    if choice == 'right':
+        dx = 20
+        dy = 0
+    elif choice == 'left':
+        dx = -20
+        dy = 0
+    elif choice == 'up':
+        dx = 0
+        dy = -20
+    elif choice == 'down':
+        dx = 0
+        dy = 20
 
-def snake_movement():
-    x, y = 200, 200
-    
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                x += 20
-            elif event.key == pygame.K_LEFT:
-                x -= 20
-            elif event.key == pygame.K_UP:
-                y += 20
-            elif event.key == pygame.K_DOWN:
-                y -= 20
+    x += dx
+    y += dy
     ui.fill(BLACK)
     pygame.draw.rect(ui, GREEN, [x,y,20,20])
-    pygame.display.update()
-    
-
 
 game()
